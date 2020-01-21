@@ -47,6 +47,8 @@ import vistaUsuarios.login;
 import controladorArticulo.controladorListaArticulo;
 import controladorConexion.ctrlConexion;
 import controladorMovimientos.ControladorHistorialVentas;
+import controladorMovimientos.CtrlCitas;
+import controladorMovimientos.CtrlExamen;
 
 import java.awt.Cursor;
 import java.awt.SplashScreen;
@@ -65,6 +67,8 @@ import modelo.Empresa;
 import modelo.EmpresaDAO;
 import modelo.Provincia;
 import modelo.ProvinciaDAO;
+import vistaMovimiento.Citas;
+import vistaMovimiento.Examen;
 import vistaMovimiento.Ventas;
 
 /**
@@ -108,6 +112,12 @@ public class mainControler {
 
     private ctrlConexion ctConexion;
     private cambio vista_confi_cambio;
+
+    private CtrlCitas ctrlCitas;
+    private Citas citas;
+
+    private CtrlExamen ctrlExamen;
+    private Examen examen;
 
     private final confi conf;
 
@@ -186,6 +196,8 @@ public class mainControler {
         vista_ventanaPrincipal.egreso.setIcon(getIcono(vista_ventanaPrincipal.egreso));
         vista_ventanaPrincipal.listaart.setIcon(getIcono(vista_ventanaPrincipal.listaart));
         vista_ventanaPrincipal.historial.setIcon(getIcono(vista_ventanaPrincipal.historial));
+        vista_ventanaPrincipal.citas.setIcon(getIcono(vista_ventanaPrincipal.citas));
+        vista_ventanaPrincipal.examen.setIcon(getIcono(vista_ventanaPrincipal.examen));
 
         inicializarLogin();
         usuario = null;
@@ -300,6 +312,30 @@ public class mainControler {
             inicializarRegistro();
             ctrl_registro.iniciarRegistro();
             cursorNomal(vista_ventanaPrincipal.menRegistrar);
+            cursorNomal(vista_ventanaPrincipal.escritorio);
+            cursorNomal(vista_ventanaPrincipal);
+        });
+
+        vista_ventanaPrincipal.citas.addActionListener((ActionEvent e) -> {
+            cursorCargando(vista_ventanaPrincipal.citas);
+            cursorCargando(vista_ventanaPrincipal.escritorio);
+            cursorCargando(vista_ventanaPrincipal);
+            cerrarVistas();
+            inicializarCitas();
+            ctrlCitas.IniciarEgreso();
+            cursorNomal(vista_ventanaPrincipal.citas);
+            cursorNomal(vista_ventanaPrincipal.escritorio);
+            cursorNomal(vista_ventanaPrincipal);
+        });
+
+        vista_ventanaPrincipal.examen.addActionListener((ActionEvent e) -> {
+            cursorCargando(vista_ventanaPrincipal.examen);
+            cursorCargando(vista_ventanaPrincipal.escritorio);
+            cursorCargando(vista_ventanaPrincipal);
+            cerrarVistas();
+            inicializarExamen();
+            ctrlExamen.IniciarEgreso();
+            cursorNomal(vista_ventanaPrincipal.examen);
             cursorNomal(vista_ventanaPrincipal.escritorio);
             cursorNomal(vista_ventanaPrincipal);
         });
@@ -568,6 +604,16 @@ public class mainControler {
                 ventas.dispose();
             }
         }
+        if (citas != null) {
+            if (citas.isVisible()) {
+                citas.dispose();
+            }
+        }
+        if (examen != null) {
+            if (citas.isVisible()) {
+                citas.dispose();
+            }
+        }
 
     }
 
@@ -605,7 +651,6 @@ public class mainControler {
                                     + "\nContacta a un administrador", "", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        vista_ventanaPrincipal.ingreso.setEnabled(true);
                         vista_ventanaPrincipal.egreso.setEnabled(true);
                         vista_ventanaPrincipal.listaart.setEnabled(true);
                         vista_ventanaPrincipal.estadoLogin.setText("Cerrar Sesión");
@@ -617,6 +662,7 @@ public class mainControler {
 
                         switch (usuario.getCodperfiles()) {
                             case 1:
+                                vista_ventanaPrincipal.ingreso.setEnabled(true);
                                 vista_ventanaPrincipal.Usuario.setEnabled(true);
                                 vista_ventanaPrincipal.articulo.setEnabled(true);
                                 vista_ventanaPrincipal.responsable.setEnabled(true);
@@ -626,9 +672,18 @@ public class mainControler {
                                 vista_ventanaPrincipal.menElimi.setVisible(true);
                                 vista_ventanaPrincipal.menResponsable.setVisible(true);
                                 vista_ventanaPrincipal.historial.setEnabled(true);
+                                vista_ventanaPrincipal.citas.setEnabled(true);
+                                vista_ventanaPrincipal.examen.setEnabled(true);
                                 break;
 
                             case 2:
+                            case 4:
+                                vista_ventanaPrincipal.citas.setEnabled(true);
+                                vista_ventanaPrincipal.examen.setEnabled(true);
+                                vista_ventanaPrincipal.responsable.setEnabled(true);
+                                vista_ventanaPrincipal.menResponsable.setVisible(true);
+                                vista_ventanaPrincipal.historial.setEnabled(true);
+
                                 break;
                         }
 
@@ -642,6 +697,24 @@ public class mainControler {
             }
         });
 
+    }
+
+    private void inicializarCitas() {
+        citas = null;
+        citas = new Citas();
+        ctrlCitas = new CtrlCitas(citas);
+        vista_ventanaPrincipal.escritorio.add(citas);
+        citas.setLocation(vista_ventanaPrincipal.escritorio.getWidth() / 2 - citas.getWidth() / 2, 15);
+        eventosVistaCitas();
+    }
+
+    private void inicializarExamen() {
+        examen = null;
+        examen = new Examen();
+        ctrlExamen = new CtrlExamen(examen);
+        vista_ventanaPrincipal.escritorio.add(examen);
+        examen.setLocation(vista_ventanaPrincipal.escritorio.getWidth() / 2 - examen.getWidth() / 2, 15);
+        eventosVistaExamen();
     }
 
     private void inicializarRegistro() {
@@ -688,7 +761,7 @@ public class mainControler {
 
         vista_ventanaPrincipal.escritorio.add(ventas);
         ventas.setLocation(vista_ventanaPrincipal.escritorio.getWidth() / 2 - ventas.getWidth() / 2, 15);
-        
+
     }
 
     private void inicializarListArticulo() {
@@ -786,6 +859,24 @@ public class mainControler {
         });
     }
 
+    private void eventosVistaCitas() {
+        citas.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {
+                vista_ventanaPrincipal.escritorio.remove(citas);
+            }
+        });
+    }
+
+    private void eventosVistaExamen() {
+        examen.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {
+                vista_ventanaPrincipal.escritorio.remove(examen);
+            }
+        });
+    }
+
     private void bloquear() {
         vista_ventanaPrincipal.ingreso.setEnabled(false);
         vista_ventanaPrincipal.egreso.setEnabled(false);
@@ -804,6 +895,8 @@ public class mainControler {
         vista_ventanaPrincipal.menElimi.setVisible(false);
         vista_ventanaPrincipal.add_palabra.setVisible(false);
         vista_ventanaPrincipal.historial.setEnabled(false);
+        vista_ventanaPrincipal.citas.setEnabled(false);
+        vista_ventanaPrincipal.examen.setEnabled(false);
 
     }
 

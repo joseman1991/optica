@@ -61,8 +61,9 @@ insert into estados values ('C','CORRECTO');
   constraint pkey_codperfil primary key(codperfil)
 );
 insert into perfiles values(1,'ADMINISTRADOR'); 
-insert into perfiles values(2,'CAJERO');
+insert into perfiles values(2,'SECRETARIA');
 insert into perfiles values(3,'ROOT');
+insert into perfiles values(4,'MÉDICO');
 
 ----------------------------------------------------------------------------------
 
@@ -359,9 +360,9 @@ constraint fkey_identificacion foreign key(codtiporesponsable, identificacion) r
 
 create table citas(
  idcitas serial not null primary key,
- descripcion character varying(100),
+ observacion character varying(100),
  codtiporesponsable character not null,
- identificacion character varying (13) not null
+ identificacion character varying (13) not null,
 );
 
 

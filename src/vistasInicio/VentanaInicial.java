@@ -21,6 +21,8 @@ public class VentanaInicial extends javax.swing.JFrame {
         responsable = new javax.swing.JButton();
         egreso = new javax.swing.JButton();
         historial = new javax.swing.JButton();
+        citas = new javax.swing.JButton();
+        examen = new javax.swing.JButton();
         escritorio = new javax.swing.JDesktopPane();
         menBusPro = new javax.swing.JMenuBar();
         menArchivo = new javax.swing.JMenu();
@@ -142,6 +144,30 @@ public class VentanaInicial extends javax.swing.JFrame {
         historial.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         historial.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(historial);
+
+        citas.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        citas.setText("Citas");
+        citas.setToolTipText("Ingresar Stock");
+        citas.setEnabled(false);
+        citas.setFocusable(false);
+        citas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        citas.setIconTextGap(-3);
+        citas.setName("cita"); // NOI18N
+        citas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        citas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(citas);
+
+        examen.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        examen.setText("Examen visual");
+        examen.setToolTipText("Ingresar Stock");
+        examen.setEnabled(false);
+        examen.setFocusable(false);
+        examen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        examen.setIconTextGap(-3);
+        examen.setName("examen"); // NOI18N
+        examen.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        examen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(examen);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,10 +301,12 @@ public class VentanaInicial extends javax.swing.JFrame {
     public javax.swing.JButton Usuario;
     public javax.swing.JMenuItem add_palabra;
     public javax.swing.JButton articulo;
+    public javax.swing.JButton citas;
     public javax.swing.JMenuItem config;
     public javax.swing.JButton egreso;
     public javax.swing.JDesktopPane escritorio;
     public javax.swing.JLabel estadoLogin;
+    public javax.swing.JButton examen;
     public javax.swing.JButton historial;
     public javax.swing.JButton ingreso;
     private javax.swing.JLabel jLabel2;
