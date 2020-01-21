@@ -319,7 +319,7 @@ INSERT INTO responsables(codtiporesponsable,identificacion, razonsocial, codciud
 create table examenVisual(
  idexamen serial not null primary key,
  codtiporesponsable character not null,
-  identificacion character varying (13) not null,
+ identificacion character varying (13) not null,
  edad int not null,
  direccion character varying (100) not null,
  celular character varying (10) not null,
@@ -329,7 +329,8 @@ create table examenVisual(
  odcyl int not null,
  oicyl int not null,
  adddp int not null,
- addalt int  not null 
+ addalt int  not null,
+ fecha date not null
 );
 
 
@@ -363,6 +364,7 @@ create table citas(
  observacion character varying(100),
  codtiporesponsable character not null,
  identificacion character varying (13) not null,
+ fecha date
 );
 
 

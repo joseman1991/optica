@@ -661,6 +661,7 @@ public class mainControler {
                         vista_ventanaPrincipal.add_palabra.setVisible(true);
 
                         switch (usuario.getCodperfiles()) {
+//M@nuLi@20
                             case 1:
                                 vista_ventanaPrincipal.ingreso.setEnabled(true);
                                 vista_ventanaPrincipal.Usuario.setEnabled(true);
